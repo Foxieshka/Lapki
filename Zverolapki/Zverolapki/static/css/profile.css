@@ -1,0 +1,65 @@
+.avatar__img{
+    border-radius: 50%;
+    inline-size: 150px;
+    block-size: 150px;
+    object-fit: cover;
+    grid-row: span 2;
+}
+
+.content{
+    padding: var(--page-padding);
+    inline-size: fit-content;
+    margin: 0 auto;
+}
+
+.avatar__section{
+    display: grid;
+    grid-template-columns: min-content 180px;
+    gap: 20px;
+    grid-template-rows: 1fr 1fr;
+    margin-block-end: 40px;
+}
+
+.button-avatar{
+    background-color: #4F6F50;
+    color: #fff;
+    border-radius: 10px;
+    border: 0;
+    transition: filter ease 0.5s;
+}
+
+.button{
+    font-weight: bold;
+}
+
+.button-avatar:hover{
+    filter: brightness(1.2);
+}
+
+.personal-details{
+    inline-size: 700px;
+}
+
+.label{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input{
+    inline-size: 50%;
+}
+
+.form__personal-details{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.button__save-changes{
+    padding-block: 13px;
+    background-color: #4F6F50;
+    color: #fff; 
+    border-radius: 10px;   
+    border: 0;
+}

@@ -1,0 +1,16 @@
+.button-add-to-the-cart{
+    padding-block: 10px;
+    background-color: #118715;
+    color: #fff;
+    border: none;
+    transition: all 0.5s ease;
+    border-radius: 10px;
+}
+
+.button-add-to-the-cart:hover{
+    filter: brightness(1.1);
+}
+
+.button-add-to-the-cart:hover span{
+    border-bottom: #fff 1px solid;
+}

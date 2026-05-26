@@ -1,0 +1,258 @@
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{    
+    font-family: 'Raleway';
+    font-size: 18px;   
+}
+
+.content{
+    padding: var(--page-padding);
+}
+
+.visually-hidden{
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: no-wrap;
+}
+
+.button{
+    color: inherit;
+    appearance: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+a{
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    appearance: none;
+    border-bottom: 1px currentColor solid;
+}
+
+p, span{
+    font-family: "Gotham Pro";
+    font-weight: medium;
+}
+
+input, label{
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.content__title{
+    margin-block-end: 15px;
+}
+
+.content__section{
+    margin-block-end: var(--section-margin-block-end, 50px);
+}
+
+.input__text-field{
+    padding: 13px;
+}
+
+.input__text-field:invalid{
+    border: 1px solid #c06363;
+}
+
+input[type="checkbox"] + .beautiful-checkbox{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    outline: 1px solid #000;    
+    position: relative;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + .beautiful-checkbox::after{
+    content: '';
+    position: absolute;
+    inset: 1px 1px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #000;    
+    background-color: #000;
+}
+
+.checkbox-label{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/*Поисковое поле в шапке*/
+.search-form{
+    inline-size: min-content;
+    position: relative;
+    appearance: none;
+}
+
+.search-field{
+    padding: 10px;
+    border: 2px #fff solid;
+    background-color: transparent;
+    color: #fff;
+    appearance: none;
+}
+
+.search-field:focus{
+    outline: 1px #fff solid;
+}
+
+.search-field:hover::placeholder{
+    text-decoration: underline;
+}
+
+.search-field::placeholder{
+    color: #b9b8b8;
+}
+
+.search-button{
+    inline-size: 35px;
+    block-size: 35px;
+    background-color: transparent;
+    border: 0;
+    background-image: url(../images/svg/search.svg);
+    background-size: contain;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    transition: opacity 0.3s ease;
+}
+
+.search-button:hover{
+    opacity: 0.7;
+}
+
+/*Шапка*/
+.header__row{
+    inline-size: min-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.header{
+    margin-block-end: var(--header-margin-block-end);
+    display: grid;
+    grid-template-columns: 1fr min-content 1fr;
+    align-items: center;
+    padding: var(--header-padding, 20px);
+    background-image: url(../images/mirolla_header.png);
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 0;
+    color: #fff;
+    background-color: #84b985;
+}
+
+.header::before{
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inline-size: 100%;
+    inset: 0;
+    block-size: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.header__logo{
+    background-image: url('../images/avatar.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100px;
+    height: 100px;
+}
+
+.navigation__list{
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+.navigation__list-item{
+    list-style-type: circle;
+}
+
+.navigation-link{
+    border-bottom: 1px currentColor solid;
+}
+
+.header__navigation{
+    grid-column: span 3;
+    margin-top: 10px;
+    position: relative;
+    z-index: 0;
+    color: #fff;
+}
+
+/*Подвал*/
+.footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    block-size: 150px;
+    background-image: url(../images/mirolla_header.png);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #84b985;
+    position: relative;
+    z-index: 0;
+    color: #fff;
+    padding: var(--footer-padding);
+}
+
+.footer::before{
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inline-size: 100%;
+    inset: 0;
+    block-size: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.footer__menu__list{
+    flex-direction: column;
+    gap: initial;
+    text-align: center;
+}
+
+.footer__menu__list-item{
+    list-style-type: none;
+}
+
+/*Иконки соцсети*/
+.social__media-list{
+    list-style: none;
+    display: flex;
+    gap: 48px;
+}
+
+.social__media-link{
+    border: none;
+}
+
+.social__media-icon{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}

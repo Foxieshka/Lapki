@@ -1,0 +1,174 @@
+.wishlist__content{
+    display: grid;
+    grid-template-columns: 17% 1fr;
+    grid-template-rows: min-content 1fr;
+    column-gap: 20px;
+}
+
+.items__list{
+    inline-size: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 280px);
+    gap: 20px;
+}
+
+.items__section .content__section{
+    grid-column: span 2;
+}
+
+.items__list{
+    list-style: none;
+}
+
+.items__card{
+    inline-size: 280px;
+    block-size: 390px;
+    border: 2px solid #928f8f;
+    box-shadow: 0 0 4px #928f8f;
+    padding: 20px;    
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(217, 224, 217, 1) 100%
+  );
+}
+
+.items__card-img{
+    border: 1px dotted #4f4e4e;
+    object-fit: cover;
+    inline-size: 100%;
+    block-size: 60%;
+}
+
+.items-card-title{
+    font-size: 18px;
+}
+
+.discount{
+    position: absolute;
+    top: 10px; right: 10px;
+    inline-size: 3em;
+    background-color: #4F6F50;
+    padding: 3px 5px;
+    color: #fff;
+    border-radius: 5px;    
+}
+
+.items__card-description-in-stock{
+    color: green;    
+}
+
+.items__card-description-current-price{
+    color: green;
+    font-weight: 550;
+}
+
+.items__card-description-old-price{
+    color: #928f8f;
+    text-decoration: line-through;
+}
+
+.button-like{
+    position: absolute;
+    top: 10px; left: 10px;
+    border: none;
+    background-color: transparent;   
+}
+
+.button-like:hover .like-icon{
+    opacity: 0.7;
+}
+
+.like-icon{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.button-add-to-the-cart{
+    padding-block: 10px;
+    background-color: #118715;
+    color: #fff;
+    border: none;
+    transition: all 0.5s ease;
+    border-radius: 10px;
+}
+
+.button-add-to-the-cart:hover{
+    filter: brightness(1.1);
+}
+
+.button-add-to-the-cart:hover span{
+    border-bottom: #fff 1px solid;
+}
+
+.filters__form{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;   
+    flex-wrap: wrap;
+    grid-row: span 2;
+}
+
+.fieldset{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: none;
+}
+
+input[type="checkbox"] + .beautiful-checkbox{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    outline: 1px solid #000;    
+    position: relative;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + .beautiful-checkbox::after{
+    content: '';
+    position: absolute;
+    inset: 1px 1px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #000;    
+    background-color: #000;
+}
+
+.filters__section{    
+    grid-column: 1;
+    border-inline-end: #000 1px solid;
+}
+
+.toogle-checkbox-field{
+    display: block;
+    background-color: rgba(217, 224, 217, 1);
+    inline-size: 62px;
+    border-radius: 30px;
+    block-size: 32px;
+    position: relative;
+    box-shadow: inset 0 2px 3px 3px rgb(157, 162, 157);
+}
+
+.toogle-checkbox-field::before{
+    content: '';
+    border-radius: 50%;
+    background-color: #fff;
+    inline-size: 30px;
+    block-size: 30px;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    transition: transform 0.5s ease;
+}
+
+.toogle-checkbox:checked + .toogle-checkbox-field::before{
+    transform: translateX(100%);
+}
