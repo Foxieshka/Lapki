@@ -1,15 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="86227d28-c52e-48a6-b49f-6f5d5ba33388" name="Changes" comment="" />
+    <list default="true" id="86227d28-c52e-48a6-b49f-6f5d5ba33388" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Lapki.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Lapki.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zverolapki/Zverolapki/static/css/catalogue.css" beforeDir="false" afterPath="$PROJECT_DIR$/Zverolapki/Zverolapki/static/css/catalogue.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zverolapki/Zverolapki/static/css/components.css" beforeDir="false" afterPath="$PROJECT_DIR$/Zverolapki/Zverolapki/static/css/components.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zverolapki/Zverolapki/static/css/wishlist.css" beforeDir="false" afterPath="$PROJECT_DIR$/Zverolapki/Zverolapki/static/css/wishlist.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zverolapki/Zverolapki/static/images/svg/down-arrow.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Zverolapki/Zverolapki/static/images/svg/down-arrow.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zverolapki/catalogue/permissions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zverolapki/catalogue/permissions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zverolapki/catalogue/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zverolapki/catalogue/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zverolapki/catalogue/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zverolapki/catalogue/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/AddToTheCart.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AddToTheCart.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/AddToTheCart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AddToTheCart.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Banner.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Banner.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Banner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Banner.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/CartItem.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/CartItem.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/CartItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/CartItem.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/CategoryCard.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/CategoryCard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/CategoryCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/CategoryCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/CheckBoxCustom.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/CheckBoxCustom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/CheckBoxCustom.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/CheckBoxCustom.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Footer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Footer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/ProductCard.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ProductCard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/ProductCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ProductCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Register.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/About.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/About.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cart.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Cart.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Cart.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Filters.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Filters.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ProductDetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ProductDetail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ProductDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ProductDetail.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Products.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Products.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Products.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Products.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/variables.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/variables.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="3AQC1LrNLAVClyYITx7RhcnIhwv" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -17,10 +71,29 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/D/Code/Python/WEB/Lapki/Zverolapki/catalogue",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\D\Code\Python\WEB\Lapki\Zverolapki\catalogue" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\D\Code\Python\WEB\Lapki\Zverolapki\catalogue" />
+      <recent name="C:\D\Code\Python\WEB\Lapki\Zverolapki\news" />
+      <recent name="C:\D\Code\Python\WEB\Lapki\Zverolapki\Zverolapki" />
+      <recent name="C:\D\Code\Python\WEB\Lapki\Zverolapki" />
+      <recent name="C:\D\Code\Python\WEB\Lapki\Zverolapki\catalogue\api" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

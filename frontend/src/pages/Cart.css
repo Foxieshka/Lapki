@@ -1,0 +1,9 @@
+.cart_items__list-item{
+    list-style-type: none;
+}
+
+.cart_items__list{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}

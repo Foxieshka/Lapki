@@ -1,0 +1,24 @@
+/* Кнопка в корзину (если нужны общие стили) */
+.button--cart {
+    /* Ваши стили */
+    cursor: pointer;
+    padding-block: 10px;
+    background-color: #118715;
+    color: #fff;
+    border: none;
+    transition: all 0.5s ease;
+    border-radius: 10px;
+}
+
+.button--text{
+    color: #fff;
+}
+
+.button--cart:hover{
+    filter: brightness(1.1);
+}
+
+.button--cart:hover span{
+    border-bottom: #fff 1px solid;
+}
+

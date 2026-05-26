@@ -1,0 +1,22 @@
+.product{
+    margin-inline: auto;
+    width: 80%;
+    display: flex;
+    gap: 40px;
+}
+
+.product__section{
+    width: calc(50%);
+    height: 50%;
+}
+
+.product__img-section{
+    overflow: hidden;
+}
+
+.product__img{
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: center;
+}

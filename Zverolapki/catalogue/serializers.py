@@ -1,5 +1,8 @@
+# serializers.py
 from rest_framework import serializers
-from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.db.models import Q
 from catalogue.models import *
 from django.contrib.auth.password_validation import validate_password
 
@@ -13,7 +16,7 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Review
         fields = ['id', 'user', 'user_name', 'user_avatar', 'product',
                   'content', 'created_at', 'updated_at', 'rating']
-        read_only_fields = ['user', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'user', 'created_at', 'updated_at']
 
     def get_user_avatar(self, obj):
         if obj.user.avatar:
@@ -25,31 +28,21 @@ class ReviewSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Отзыв должен содержать минимум 10 символов")
         return value
 
-class SubCategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SubCategory
-        fields = ['id', 'title', 'category']
-        # или fields = '__all__'
-        # или exclude = ['category'] - исключить поле
-
 class CategorySerializer(serializers.ModelSerializer):
-    # Вложенный сериализатор - показывает все подкатегории внутри категории
-    sub_categories = SubCategorySerializer(many=True, read_only=True)
-    products_count = serializers.SerializerMethodField()
-
-    class Meta:
+   class Meta:
         model = Category
-        fields = ['id', 'title', 'sub_categories', 'products_count']
+        fields = ['id', 'title']
+        read_only_fields = ['id']
+
+class AnimalSerializer(serializers.ModelSerializer):
+    products_count = serializers.SerializerMethodField()
+    class Meta:
+        model = Animal
+        fields = ['id', 'image', 'description', 'title', 'products_count']
         read_only_fields = ['id', 'products_count']
 
     def get_products_count(self, obj):
-        return Product.objects.filter(sub_category__category=obj).count()
-
-class AnimalSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Animal
-        fields = ['id', 'image', 'description', 'title']
-        read_only_fields = ['id',]
+        return Product.objects.filter(animal=obj).count()
 
 class ProductImageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -61,7 +54,7 @@ class ProductSerializer(serializers.ModelSerializer):
     images = ProductImageSerializer(many=True, read_only=True)
     reviews = ReviewSerializer(many=True, read_only=True)
     animal_title = serializers.CharField(source='animal__title', read_only=True)
-    sub_category_detail = SubCategorySerializer(source='sub_category', read_only=True)
+    category_title = CategorySerializer(source='category__title', read_only=True)
     user_name = serializers.CharField(source='user__username', read_only=True)
 
     # Кастомные поля
@@ -71,10 +64,11 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
-            'id', 'user', 'user_name', 'title', 'description', 'price', 'discount', 'final_price',
+            'id', 'user', 'user_name', 'title', 'description',
+            'price', 'discount', 'final_price',
             'in_stock', 'average_rating', 'box_type',
             'thumbnail', 'animal', 'animal_title',
-            'sub_category', 'sub_category_detail', 'reviews',
+            'category', 'category_title', 'reviews',
             'animal_size', 'created_at', 'updated_at',
             'images',
         ]
@@ -99,20 +93,9 @@ class ProductSerializer(serializers.ModelSerializer):
             return sum(r.rating for r in reviews) / len(reviews)
         return 0
 
-class ProductListSerializer(serializers.ModelSerializer):
-    #Упрощенный сериализатор для списка товаров (экономия трафика)
-    final_price = serializers.SerializerMethodField()
-    class Meta:
-        model = Product
-        fields = ['id', 'title', 'price', 'discount', 'final_price',
-                  'in_stock', 'thumbnail', 'rating']
-
-    def get_final_price(self, obj):
-        return obj.get_final_price()
-
 class CartItemSerializer(serializers.ModelSerializer):
     # Сериализатор для товара в корзине
-    product_detail = ProductListSerializer(source='product', read_only=True)
+    product_detail = ProductSerializer(source='product', read_only=True)
     total_price = serializers.DecimalField(max_digits=9, decimal_places=2, read_only=True)
 
     class Meta:
@@ -144,7 +127,7 @@ class CartSerializer(serializers.ModelSerializer):
 
 class WishlistItemSerializer(serializers.ModelSerializer):
     # Сериализатор для товара в избранном
-    product_detail = ProductListSerializer(source='product', read_only=True)
+    product_detail = ProductSerializer(source='product', read_only=True)
 
     class Meta:
         model = WishlistItem
@@ -175,7 +158,6 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'created_at']
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
-    # Сериализатор для регистрации
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True)
 
@@ -201,12 +183,33 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
-class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField()
-    password = serializers.CharField()
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        username_or_email = attrs.get('username')
+        # Пытаемся найти пользователя по username или email
+        try:
+            # Ищем пользователя (username или email)
+            user = User.objects.get(
+                Q(username=username_or_email) | Q(email=username_or_email)
+            )
+            # Подменяем username для аутентификации
+            attrs['username'] = user.username
+        except User.DoesNotExist:
+            # Если пользователь не найден, оставляем как есть
+            pass
 
-    def validate(self, data):
-        user = authenticate(**data)
-        if user and user.is_active:
-            return {'user': user}
-        raise serializers.ValidationError("Неверный логин или пароль")
+        # Вызываем родительский метод
+        data = super().validate(attrs)
+        # Добавляем данные пользователя
+        avatar_url = None
+        if hasattr(self.user, 'avatar') and self.user.avatar:
+            avatar_url = self.user.avatar.url
+        data['user'] = {
+            'id': self.user.id,
+            'username': self.user.username,
+            'email': self.user.email,
+            'first_name': self.user.first_name,
+            'last_name': self.user.last_name,
+            'avatar': avatar_url,
+        }
+        return data

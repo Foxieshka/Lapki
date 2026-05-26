@@ -1,0 +1,32 @@
+/* Кастомный чекбокс (общий блок) */
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.checkbox__custom {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000;
+    display: inline-block;
+    position: relative;
+    /* Добавьте стили для состояния checked, если нужно */
+}
+
+input[type='checkbox']:checked + .checkbox__custom::before{
+    content: '';
+    position: absolute;
+    display: block;
+    inset: 1px;
+    width: 17px;
+    height: 17px;
+    background-color: #000;
+    z-index: 1;
+}
+
+.checkbox__label {
+    user-select: none;
+    width: fit-content;
+}

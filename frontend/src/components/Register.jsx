@@ -11,8 +11,8 @@ function Register() {
   });
   const [message, setMessage] = useState('');
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -25,13 +25,13 @@ function Register() {
 
     try {
       // Отправляем POST-запрос к вашему RegisterView
-      const response = await API.post('/register/', {
+      const response = await API.post('/auth/register/', {
         username: formData.username,
         email: formData.email,
         password: formData.password,
         password2: formData.password2
       });
-      
+
       // Если регистрация успешна, ваш RegisterView возвращает токены
       if (response.data.access && response.data.refresh) {
         localStorage.setItem('access_token', response.data.access);
