@@ -8,7 +8,7 @@ function Footer(){
         <footer className="footer">
         <address className="address footer__address">
             <a href="tel:+70000000">+7 918 878 69 62</a><br/>
-            <a href="mailto:mail@example.com">aliya_kakabayeva@vk.com</a>
+            <a href="mailto:aliya_kakabayeva@vk.com">aliya_kakabayeva@vk.com</a>
             <p>
                 г. Ставрополь,
                 <br/>

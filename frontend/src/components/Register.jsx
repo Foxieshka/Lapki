@@ -1,6 +1,7 @@
 // src/components/Register.js
 import React, { useState } from 'react';
-import API from '../services/api';
+import './Register.css'
+import { useAuth } from '../contexts/AuthContext'
 
 function Register() {
   const [formData, setFormData] = useState({

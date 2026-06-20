@@ -1,6 +1,4 @@
-/* Кнопка в корзину (если нужны общие стили) */
 .button--cart {
-    /* Ваши стили */
     cursor: pointer;
     padding-block: 10px;
     background-color: #118715;
@@ -8,6 +6,11 @@
     border: none;
     transition: all 0.5s ease;
     border-radius: 10px;
+    padding-inline: 15px;
+}
+
+.button--cart:disabled{
+    background-color: gray;
 }
 
 .button--text{

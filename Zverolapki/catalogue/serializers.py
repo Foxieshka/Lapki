@@ -8,26 +8,6 @@ from django.contrib.auth.password_validation import validate_password
 
 User = get_user_model()
 
-class ReviewSerializer(serializers.ModelSerializer):
-    user_name = serializers.CharField(source='user.username', read_only=True)
-    user_avatar = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Review
-        fields = ['id', 'user', 'user_name', 'user_avatar', 'product',
-                  'content', 'created_at', 'updated_at', 'rating']
-        read_only_fields = ['id', 'user', 'created_at', 'updated_at']
-
-    def get_user_avatar(self, obj):
-        if obj.user.avatar:
-            return obj.user.avatar.url
-        return None
-
-    def validate_content(self, value):
-        if len(value) < 10:
-            raise serializers.ValidationError("Отзыв должен содержать минимум 10 символов")
-        return value
-
 class CategorySerializer(serializers.ModelSerializer):
    class Meta:
         model = Category
@@ -44,38 +24,37 @@ class AnimalSerializer(serializers.ModelSerializer):
     def get_products_count(self, obj):
         return Product.objects.filter(animal=obj).count()
 
-class ProductImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProductImage
-        fields = ['id', 'image']
-        read_only_fields = ['id', ]
-
 class ProductSerializer(serializers.ModelSerializer):
-    images = ProductImageSerializer(many=True, read_only=True)
-    reviews = ReviewSerializer(many=True, read_only=True)
-    animal_title = serializers.CharField(source='animal__title', read_only=True)
-    category_title = CategorySerializer(source='category__title', read_only=True)
-    user_name = serializers.CharField(source='user__username', read_only=True)
-
-    # Кастомные поля
+    animal_title = serializers.CharField(source='animal.title', read_only=True)
+    category_title = serializers.CharField(source='category.title', read_only=True)
+    user_name = serializers.CharField(source='user.username', read_only=True)
     final_price = serializers.SerializerMethodField()
-    average_rating = serializers.SerializerMethodField()
+    #Кастомные поля
+    box_type_name = serializers.SerializerMethodField(read_only=True)
+    animal_size_name = serializers.SerializerMethodField(read_only=True)
+    can_edit = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
         fields = [
             'id', 'user', 'user_name', 'title', 'description',
             'price', 'discount', 'final_price',
-            'in_stock', 'average_rating', 'box_type',
+            'in_stock', 'box_type', 'box_type_name',
             'thumbnail', 'animal', 'animal_title',
-            'category', 'category_title', 'reviews',
-            'animal_size', 'created_at', 'updated_at',
-            'images',
+            'category', 'category_title', 'animal_size',
+            'animal_size_name', 'created_at', 'updated_at',
+            'can_edit',
         ]
-        read_only_fields = ['created_at', 'updated_at', 'average_rating']  # Только для чтения
+        read_only_fields = ['created_at', 'updated_at', ]  # Только для чтения
 
     def get_final_price(self, obj):
         return obj.get_final_price()
+
+    def get_box_type_name(self, obj):
+        return obj.get_box_type_display()
+
+    def get_animal_size_name(self, obj):
+        return obj.get_animal_size_display()
 
     def validate_price(self, value):
         if value <= 0:
@@ -87,16 +66,18 @@ class ProductSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Скидка не может превышать 100%")
         return value
 
-    def get_average_rating(self, obj):
-        reviews = obj.reviews.all()
-        if reviews:
-            return sum(r.rating for r in reviews) / len(reviews)
-        return 0
+    def get_can_edit(self, obj):
+        # Получаем пользователя из контекста запроса
+        request = self.context.get('request')
+        if request and request.user.is_authenticated:
+            # Логика проверки: например, автор объекта или администратор
+            return obj.user == request.user or request.user.is_staff
+        return False
 
 class CartItemSerializer(serializers.ModelSerializer):
     # Сериализатор для товара в корзине
     product_detail = ProductSerializer(source='product', read_only=True)
-    total_price = serializers.DecimalField(max_digits=9, decimal_places=2, read_only=True)
+    total_price = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = CartItem
@@ -124,37 +105,12 @@ class CartSerializer(serializers.ModelSerializer):
         # Общая стоимость корзины
         return sum(item.get_total_price() for item in obj.items.all())
 
-
-class WishlistItemSerializer(serializers.ModelSerializer):
-    # Сериализатор для товара в избранном
-    product_detail = ProductSerializer(source='product', read_only=True)
-
-    class Meta:
-        model = WishlistItem
-        fields = ['id', 'product', 'product_detail']
-
-
-class WishlistSerializer(serializers.ModelSerializer):
-    # Сериализатор для избранного
-    items = WishlistItemSerializer(many=True, read_only=True)
-    total_items = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Wishlist
-        fields = ['id', 'user', 'items', 'total_items']
-
-    def get_total_items(self, obj):
-        return obj.items.count()
-
 # Пользователь
 class UserSerializer(serializers.ModelSerializer):
-    cart = CartSerializer(read_only=True)
-    wishlist = WishlistSerializer(read_only=True)
-
     class Meta:
         model = User
         fields = ['id', 'username', 'email', 'first_name', 'last_name',
-                  'avatar', 'birth_date', 'wishlist', 'cart']
+                  'avatar', 'birth_date']
         read_only_fields = ['id', 'created_at']
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -200,10 +156,11 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         # Вызываем родительский метод
         data = super().validate(attrs)
-        # Добавляем данные пользователя
+
         avatar_url = None
-        if hasattr(self.user, 'avatar') and self.user.avatar:
+        if self.user.avatar:
             avatar_url = self.user.avatar.url
+        # Добавляем данные пользователя
         data['user'] = {
             'id': self.user.id,
             'username': self.user.username,
@@ -211,5 +168,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             'first_name': self.user.first_name,
             'last_name': self.user.last_name,
             'avatar': avatar_url,
+            'birth_date': self.user.birth_date,
         }
         return data

@@ -14,34 +14,40 @@ function Products(){
     const [selectedAnimals, setSelectedAnimals] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
 
+    //Стейты для пагинации
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+
     //Стейты для поиска и процесса загрузки
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [search, setSearch] = useState('')
+    const [search, setSearch] = useState('');
 
     // Делаем запросы к Django при монтировании компонента
     useEffect(() => {
         // Функция для параллельного получения всех данных
-        const fetchData = async () => {
+        const fetchData = async (page) => {
             try {
                 setLoading(true);
                 const [animalsRes, categoriesRes, productsRes] = await Promise.all([
                     axios.get('http://127.0.0.1:8000/api/animals/'),
                     axios.get('http://127.0.0.1:8000/api/categories'),
-                    axios.get('http://127.0.0.1:8000/api/products')
+                    axios.get(`http://127.0.0.1:8000/api/products?page=${page}`)
                 ]);
                 // Записываем данные в соответствующие стейты
                 setAnimals(animalsRes.data.results || animalsRes.data);
                 setCategories(categoriesRes.data.results || categoriesRes.data);
                 setProducts(productsRes.data.results || productsRes.data);
+                // Вычисляем общее количество страниц (count / PAGE_SIZE)
+                setTotalPages(Math.ceil(productsRes.data.count / 9));
             } catch (err) {
                 setError("Не удалось загрузить данные с сервера.");
             } finally {
                 setLoading(false);
             }
         };
-        fetchData();
-    }, []); // Пустой массив зависимостей — сработает 1 раз
+        fetchData(currentPage);
+    }, [currentPage]); // Вызов при монтировании компонента и изменении страницы
 
     // Эффект для динамической отправки фильтров на бэкенд при их изменении
     useEffect(() => {
@@ -54,7 +60,8 @@ function Products(){
                     animals: selectedAnimals,
                     categories: selectedCategories
                 };
-                const response = await fetch('http://127.0.0.1:8000/api/products/filters/',
+                const response = await fetch(
+                    'http://127.0.0.1:8000/api/products/filters/',
                 {
                     method: 'post',
                     headers: {
@@ -66,12 +73,12 @@ function Products(){
                     return data.json();
                 })
                 .catch(error => {
-                    alert('Не удалось загрузить фильтры.');
+                    console.log(error);
                 });
                 //setProducts(response.data.results || response.data);
                 setProducts(response);
             } catch (err) {
-                alert('Не удалось применить фильтры.');
+                console.log(err);
             }
         };
         fetchFilteredProducts();
@@ -92,6 +99,15 @@ function Products(){
         );
     };
 
+    // Обработчики кнопок
+    const handleNextPage = () => {
+        if (currentPage < totalPages) setCurrentPage(prev => prev + 1);
+    };
+
+    const handlePrevPage = () => {
+        if (currentPage > 1) setCurrentPage(prev => prev - 1);
+    };
+
     const filteredProducts = products.filter(p =>
         p.title.toLowerCase().includes(search.toLowerCase()))
 
@@ -100,22 +116,21 @@ function Products(){
     if (error) return <main><h2 style={{textAlign: 'center', color: 'red', marginTop: '50px'}}>{error}</h2></main>;
     return (
         <main>
-            <h1 className="content__title" style={{marginTop: 0, fontSize: '50px'}}>Наши товары</h1>
+            <h1 className="content__title" style={{marginTop: 0}}>Наши товары</h1>
             <section className="search-sorting-section">
                 <form className="sorting-form">
                     <label htmlFor="sorting-select">Сортировать по:</label>
                     <select name="sort" id="sorting-select" className="sorting-form__select">
                         <option value="">Не сортировать</option>
-                        <option value="new">Новинки</option>
-                        <option value="cheap">Дешевле</option>
-                        <option value="expensive">Дороже</option>
+                        <option value="-created_at">Новинки</option>
+                        <option value="price">Дешевле</option>
+                        <option value="-price">Дороже</option>
                     </select>
                 </form>
                 <input type="text" placeholder="Поиск..." value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 style={{padding: '0.5rem', width:'200px'}} name="search"/>
             </section>
-
             <section className="filters-section">
                 <form className="filters-form" name="animals">
                     <h3 className="filters-form__title">Для кого ищете?</h3>
@@ -140,14 +155,21 @@ function Products(){
             <section className="products-section">
                 <ul className="products-grid">
                 {!filteredProducts.length && <h2>По данному запросу товары не найдены.</h2>}
-                {filteredProducts.map(product => (<li className="products-grid__item">
-                    <ProductCard
-                        key={product.id}
-                        product={product}
-                    />
+                {filteredProducts.map(product => (<li key={product.id} className="products-grid__item">
+                    <ProductCard product={product} />
                 </li>
                 ))}
                 </ul>
+                <div className="pagination-block" style={{marginTop: '30px', width: 'fit-content',
+                    borderRadius: '15px', display: 'flex', gap: '8px', marginInline: 'auto'}}>
+                    <button onClick={handlePrevPage} disabled={currentPage === 1}>
+                      Назад 🡠
+                    </button>
+                    <span>Страница {currentPage} из {totalPages}</span>
+                    <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                      Вперед 🡢
+                    </button>
+                </div>
             </section>
         </main>
     )

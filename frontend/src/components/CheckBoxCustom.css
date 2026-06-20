@@ -1,21 +1,20 @@
 /* Кастомный чекбокс (общий блок) */
-.checkbox {
+.checkbox__square {
     display: flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
 }
 
-.checkbox__custom {
+.checkbox__square-span {
     width: 20px;
     height: 20px;
     border: 1px solid #000;
     display: inline-block;
     position: relative;
-    /* Добавьте стили для состояния checked, если нужно */
 }
 
-input[type='checkbox']:checked + .checkbox__custom::before{
+input[type='checkbox']:checked + .checkbox__square-span::before{
     content: '';
     position: absolute;
     display: block;
@@ -26,7 +25,7 @@ input[type='checkbox']:checked + .checkbox__custom::before{
     z-index: 1;
 }
 
-.checkbox__label {
+.checkbox__square-label {
     user-select: none;
     width: fit-content;
 }

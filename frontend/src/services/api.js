@@ -1,18 +1,47 @@
-// src/services/api.js
 import axios from 'axios';
+import authService from './authService';
 
-const API = axios.create({
-    //baseURL: '/api', // Прокси сам подставит http://localhost:8000
+const api = axios.create({
     baseURL: 'http://localhost:8000/api',
+    headers: {
+    'Content-Type': 'application/json',
+    },
 });
 
-// Перехватчик запросов: добавляет токен в заголовок Authorization
-API.interceptors.request.use((config) => {
-    const token = localStorage.getItem('access_token'); // Или sessionStorage
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-    }
+// Request interceptor — добавляем токен к каждому запросу
+api.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('access_token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
     return config;
-});
-
-export default API;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+// Response interceptor — обрабатываем ошибку 401 (неавторизован)
+api.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+        const originalRequest = error.config;
+        if (error.response?.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
+            try {
+                const newTokens = await authService.refreshToken();
+                if (newTokens) {
+                    originalRequest.headers.Authorization = `Bearer
+                    ${newTokens.access}`;
+                    return api(originalRequest);
+                }
+            } catch (refreshError) {
+                authService.logout();
+                window.location.href = '/login';
+                return Promise.reject(refreshError);
+                }
+        }
+        return Promise.reject(error);
+    }
+);
+export default api;

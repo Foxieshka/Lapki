@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'drf_spectacular',
     'django_filters',
     'catalogue.apps.CatalogueConfig'
 ]
@@ -69,6 +70,16 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer', # Веб-интерфейс API
     ],
+    # Подключение генератора схем drf-spectacular
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# Кастомизация метаданных документации
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Lapki API',
+    'DESCRIPTION': 'Это страница документации API учебного сайта онлайн-зоомагазина.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,  # Скрывать эндпоинт самой схемы из документации
 }
 
 # JWT настройки (для логина)

@@ -41,12 +41,9 @@
 }
 
 .filters-form__group {
-    display: grid;
     width: fit-content;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 200px;
-    grid-auto-flow: column;
-    max-height: 110px;
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     border: none;
 }
@@ -74,8 +71,8 @@
 .products-grid {
     inline-size: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, 290px);
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, 280px);
+    gap: 25px;
     justify-content: center;
     list-style: none;
     padding: 0;

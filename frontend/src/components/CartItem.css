@@ -3,6 +3,7 @@
     justify-content: space-between;
     align-items: flex-start;
     flex-grow: 1;
+    gap: 13px;
 }
 
 .cart_item-img{
@@ -20,11 +21,11 @@
     border-radius: 10px;
     border: 2px #dee3df solid;
     padding: 10px;
-    width: calc(65% - 10px);
 }
 
-.cart_item-name{
+.cart_item-title{
     font-weight: bold;
+    word-wrap: normal;
 }
 
 .cart_item-price{

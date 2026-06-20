@@ -2,8 +2,26 @@
     list-style-type: none;
 }
 
+.cart-container__content{
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+
 .cart_items__list{
     display: flex;
     flex-direction: column;
     gap: 30px;
+}
+
+.cart-container__summary{
+    max-width: 25rem;
+    height: fit-content;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 2px solid gray;
+}
+
+.cart-container__button{
+
 }

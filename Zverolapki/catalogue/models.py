@@ -61,10 +61,8 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=9, decimal_places=3, verbose_name="Цена")
     discount = models.PositiveSmallIntegerField(verbose_name="Скидка", default=0)
     in_stock = models.BooleanField(verbose_name="В наличии", default=True, db_index=True)
-
     box_type = models.CharField(max_length=30, choices=BoxType.choices, blank=True,
                                 verbose_name="Тип упаковки", default=BoxType.DOYPACK)
-
     thumbnail = models.ImageField(upload_to="products", blank=True, verbose_name="Изображение товара")
 
     animal = models.ForeignKey('Animal', null=True, verbose_name="Вид животного", on_delete=PROTECT)
@@ -82,16 +80,8 @@ class Product(models.Model):
         return self.title
 
     def get_final_price(self):
-        return floor(self.price * (100 - self.discount) / 100)
+        return int(floor(self.price * (100 - self.discount) / 100))
 
-#Изображение товара
-class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=PROTECT, related_name="images")
-    image = models.ImageField(upload_to='products/', verbose_name="Изображение товара")
-
-    class Meta:
-        verbose_name = "Изображение товара"
-        verbose_name_plural = "Изображения товаров"
 
 #Вид животного
 class Animal(models.Model):
@@ -129,7 +119,7 @@ class CartItem(models.Model):
         return f"{self.quantity} x {self.product.title}"
 
     def get_total_price(self):
-        return self.product.price * self.quantity
+        return self.product.get_final_price() * self.quantity
 
     class Meta:
         db_table = 'cart_items'
@@ -137,40 +127,4 @@ class CartItem(models.Model):
         verbose_name_plural = "Товары в корзине"
 
 
-# Избранное
-class Wishlist(models.Model):
-    user = models.ForeignKey(User, on_delete=CASCADE,
-                             verbose_name="Пользователь", related_name="wishlist",
-                             null=True, blank=True)
-    class Meta:
-        db_table = 'wishlist'
-        verbose_name = 'Избранное'
-        verbose_name_plural = "Избранное"
-
-# Товар в избранном
-class WishlistItem(models.Model):
-    wishlist = models.ForeignKey(Wishlist, blank=True, on_delete=CASCADE,
-                                 related_name="items", verbose_name="Избранное")
-    product = models.ForeignKey(Product, on_delete=CASCADE, verbose_name="Товар")
-
-    class Meta:
-        db_table = 'wishlist_items'
-        verbose_name = 'Товар в избранном'
-        verbose_name_plural = "Товары в избранном"
-
-# Отзыв о товаре
-class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=CASCADE,
-                             related_name="reviews", verbose_name="Пользователь")
-    product = models.ForeignKey(Product, on_delete=CASCADE,
-                                related_name="reviews", verbose_name="Товар")
-    content = models.TextField(max_length=200, verbose_name="Содержание")
-    rating = models.SmallIntegerField(default=0, verbose_name="Рейтинг")
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="Обновлено")
-
-    class Meta:
-        db_table = 'reviews'
-        verbose_name = 'Отзыв о товаре'
-        verbose_name_plural = "Отзывы о товаре"
 

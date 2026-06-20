@@ -1,7 +1,7 @@
 /* Карточка товара */
 .product-card {
-    inline-size: 250px;
-    block-size: 360px;
+    inline-size: 280px;
+    block-size: 380px;
     border: 2px solid #928f8f;
     box-shadow: 0 0 4px #928f8f;
     padding: 20px;
@@ -60,7 +60,7 @@
 }
 
 .product-card__stock-status--not-in-stock {
-    color: red;
+    color: #ad0505;
 }
 
 /* Цены */

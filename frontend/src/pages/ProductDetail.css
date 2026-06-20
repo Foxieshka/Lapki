@@ -1,22 +1,90 @@
 .product{
     margin-inline: auto;
-    width: 80%;
-    display: flex;
+    width: 90%;
+    display: grid;
     gap: 40px;
-}
-
-.product__section{
-    width: calc(50%);
-    height: 50%;
+    grid-template-columns: 450px 1fr 1fr;
+    text-align: left;
 }
 
 .product__img-section{
+    height: 450px;
     overflow: hidden;
+    border: 1px dotted gray;
+}
+
+.product__section{
+    width: 100%;
+}
+
+.product__description-paragraph{
+    text-align: left;
+}
+
+.product__title{
+    margin-block: 10px;
 }
 
 .product__img{
-    inline-size: 100%;
-    block-size: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center;
+}
+
+/* Цены */
+.product__price{
+    margin-bottom: 10px;
+}
+
+.button-controls{
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.button-text{
+    font-size: inherit;
+    font-weight: bold;
+}
+
+.product-card__price--current {
+    color: green;
+    font-weight: 550;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.product__delete-button{
+    cursor: pointer;
+    padding-block: 10px;
+    background-color: #118715;
+    color: #fff;
+    border: none;
+    transition: all 0.5s ease;
+    border-radius: 10px;
+    padding-inline: 15px;
+    font-size: inherit;
+}
+
+.product-card__price--old {
+    color: #928f8f;
+    text-decoration: line-through;
+}
+
+.product__price-section{
+    /*background-color: aliceblue;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);*/
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 20px;
+    padding-bottom: 0;
+}
+
+.product__description-heading{
+    text-align: left;
+}
+
+.product__description-section{
+    grid-column: span 2;
 }

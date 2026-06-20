@@ -1,7 +1,7 @@
 import Header from '../components/Header.jsx'
 import React, { useState, useEffect } from 'react';
-import Banner from '../components/Banner.jsx'
-import CategoryCard from '../components/CategoryCard.jsx'
+import Banner from '../components/banner/Banner.jsx'
+import CategoryCard from '../components/category_card/CategoryCard.jsx'
 
 function Home(){
     const [animals, setAnimals] = useState([]);
