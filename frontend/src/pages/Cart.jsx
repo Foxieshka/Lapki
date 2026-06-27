@@ -43,8 +43,8 @@ function Cart() {
                 </ul>
                 <div className="cart-container__summary">
                     <h2>К оплате: {cartData.total_price}Р</h2>
-                    <button className="cart-container__button" type="button">
-                        Заказать
+                    <button className="button cart-container__button" type="button">
+                        <span>Заказать</span>
                     </button>
                 </div>
             </div>

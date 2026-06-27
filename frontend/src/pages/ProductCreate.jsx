@@ -22,7 +22,7 @@ const productCreateSchema = yup.object().shape({
     .matches(/^[A-Za-zА-Яа-яЁё\s\-]+$/, 'Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы'),
     description: yup.string().required("Описание товара обязательно!"),
     price: yup.number("Цена должна быть числом!")
-    .positive("Цена не может быть отрицательной!"),
+    .positive("Цена не может меньше или равной 0!"),
     discount: yup.number("Скидка должна быть числом!")
     .min(0, "Скидка не может быть отрицательной!")
     .max(100, "Скидка не может быть больше 100 %!")
@@ -73,7 +73,7 @@ export default function ProductCreate() {
             description: productData?.description || '',
             price: productData?.price || 0,
             discount: productData?.discount || 0,
-            in_stock: productData?.in_stock,
+            in_stock: productData?.in_stock || true,
             thumbnail: null,
             category: productData?.category || '',
             animal: productData?.animal || '',
@@ -83,7 +83,7 @@ export default function ProductCreate() {
         enableReinitialize: true,
         validationSchema: productCreateSchema, // Подключаем схему Yup
         onSubmit: async(values) => {
-            const response = await api.post("products/", values,{
+            const response = await api.post("products/", values, {
                  headers: {
                      'Content-Type': 'multipart/form-data',
                  }
@@ -137,6 +137,9 @@ export default function ProductCreate() {
             style={{textTransform: "uppercase"}}>
                 {id ? "Редактирование товара" : "Создание товара"}
             </h2>
+            { message && <div className="success-message">
+                {message}
+            </div>}
             {/* Поле Наименование */}
             <label htmlFor="title" className="form__label">
                 <input
@@ -209,6 +212,7 @@ export default function ProductCreate() {
                     checked={formik.values.in_stock}
                     name="in_stock"
                     id="in_stock"
+                    value={formik.values.in_stock}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />

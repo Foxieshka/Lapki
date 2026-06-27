@@ -8,6 +8,15 @@
     text-align: 'center';
 }*/
 
+.success-message{
+    color: #4caf50;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #e8f5e9;
+    border-radius: 4px;
+    border-left: 4px solid #4caf50;
+}
+
 .product__create__form{
     width: 60%;
     margin-inline: auto;

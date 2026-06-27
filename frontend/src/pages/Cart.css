@@ -24,9 +24,17 @@
     height: fit-content;
     padding: 1rem;
     border-radius: 10px;
-    border: 2px solid gray;
+    border: 2px #dee3df solid;
+    box-shadow: -1px 1px 1px 1px #dee3df;
 }
 
 .cart-container__button{
-
+    cursor: pointer;
+    padding-block: 10px;
+    background-color: #118715;
+    color: #fff;
+    border: none;
+    transition: all 0.5s ease;
+    border-radius: 10px;
+    padding-inline: 15px;
 }
