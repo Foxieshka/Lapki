@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 const fetchCartData = async() => {
-    const response = await api.get("/cart");
+    const response = await api.get("/cart/");
     return response.data;
 }
 
@@ -23,11 +23,11 @@ export const CartProvider = ({ children }) => {
     // Мутация: добавить в корзину
     const addToCartMutation = useMutation({
         mutationFn: async (item) => {
-          const res = await api.post('/api/cart-items/', {
-            method: 'POST',
-            body: JSON.stringify(item)
+          const res = await api.post('/cart-items/',  {
+            product: item.product,
+            quantity: item.quantity || 1
           });
-          return res.json();
+          return res.data;
         },
         onSuccess: () => {
           // Обновляем кэш, чтобы UI отобразил актуальные данные
@@ -36,30 +36,16 @@ export const CartProvider = ({ children }) => {
     });
     // Мутация: изменить количество товара в корзине
     const updateQuantityMutation = useMutation({
-        mutationFn: async(delta, cartItem) => {
+        mutationFn: async ({ delta, cartItem }) => {
             const newQuantity = cartItem.quantity + delta;
-            if(newQuantity <= 0){
-                 api.delete(`/cart-items/${cartItem.id}/`)
-                 .then(response => {
-                    console.log(response);
-                    return response.data;
-                 })
-                .catch(err => {
-                    console.log(err)
-                })
-                return;
-            }
-            api.patch(`/cart-items/${cartItem.id}/`,
-                { quantity: newQuantity })
-            .then(response => {
+            if (newQuantity <= 0) {
+                const response = await api.delete(`/cart-items/${cartItem.id}/`);
                 return response.data;
-            })
-            .then(data => {
-                return data
-            })
-            .catch(err => {
-                console.log(err)
-            })
+            }
+            const response = await api.patch(`/cart-items/${cartItem.id}/`, {
+                quantity: newQuantity
+            });
+            return response.data;
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['cartData'] });
@@ -68,15 +54,17 @@ export const CartProvider = ({ children }) => {
     // Мутация: удалить из корзины
     const removeFromCartMutation = useMutation({
         mutationFn: async (itemId) => {
-          const res = await fetch(`/api/cart-items/${itemId}/`, { method: 'DELETE' });
-          return res.json();
+            const response = await api.delete(`/cart-items/${itemId}/`);
+            return response.data;
         },
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ['cartData'] });
+            queryClient.invalidateQueries({ queryKey: ['cartData'] });
         }
     });
     const value = {
         cartData,
+        isLoading,
+        error,
         addToTheCart: addToCartMutation.mutate,
         removeFromCart: removeFromCartMutation.mutate,
         updateQuantity: updateQuantityMutation.mutate,

@@ -2,20 +2,13 @@ import './AddToTheCart.css'
 import api from '../services/api';
 import {useAuth} from '../context/AuthContext';
 import {useCart} from '../context/CartContext';
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 
 function AddToTheCart({product, quantity = 1}){
-    const {updateQuantity} = useCart();
+    const {addToTheCart} = useCart();
     function handleClick(){
-        // Проверка наличия товара
-        if (!product.in_stock) {
-            alert("Товара нет в наличии!");
-            return;
-        }
-
-        alert("Товар добавлен в корзину!");
+        addToTheCart({ product: product.id, quantity: quantity });
     }
-
     return (
         <button className="button button--cart"
         onClick={handleClick} disabled={!product.in_stock}>

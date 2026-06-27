@@ -3,30 +3,19 @@ import './Cart.css';
 import CartItem from '../components/CartItem.jsx';
 import api from '../services/api';
 import {useAuth} from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 
 function Cart() {
-    const [cart, setCart] = useState({});
+    const { cartData, isLoading, error } = useCart();  // используем контекст
     const [cartItems, setCartItems] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
     const { login, isAuthenticated } = useAuth();
-
     useEffect(() => {
-        const fetchData = async() => {
-            api.get('/cart/')
-            .then(response => {
-                return response.data
-            })
-            .then(cartData => {
-                setCartItems(cartData.items)
-                setCart(cartData);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        };
-        fetchData();
-    }, []);
+        if(cartData){
+            setCartItems(cartData.items);
+        }
+    }, [cartData]);
+    if (isLoading) return <div>Загрузка...</div>;
+    if (error) return <div>Ошибка: {error.message}</div>;
 
     return (
         <div className="cart_container">
@@ -36,7 +25,7 @@ function Cart() {
                 </a>
             </h2>
             <h2 className="cart_container__title">Корзина</h2>
-            <p>В корзине {cart.total_quantity} товаров</p>
+            <p>В корзине {cartData.total_quantity} товаров</p>
             {cartItems.length == 0 &&
                 <div className="cart_container__content">
                     <h3>В корзине пока пусто</h3>
@@ -47,13 +36,13 @@ function Cart() {
             <div className="cart_container__content">
                 <ul className="cart_items__list">
                     { cartItems.map(cartItem => {
-                        return <li className="cart_items__list-item">
-                            <CartItem key={cartItem.id} cartItem={cartItem}/>
+                        return <li key={cartItem.id} className="cart_items__list-item">
+                            <CartItem cartItem={cartItem}/>
                             </li>
                     })}
                 </ul>
                 <div className="cart-container__summary">
-                    <h2>К оплате: {cart.total_price}Р</h2>
+                    <h2>К оплате: {cartData.total_price}Р</h2>
                     <button className="cart-container__button" type="button">
                         Заказать
                     </button>
