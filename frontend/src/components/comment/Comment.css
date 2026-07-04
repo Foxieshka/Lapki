@@ -1,0 +1,55 @@
+.comment{
+    padding: 1rem;
+    border: #c4c4c4 2px solid;
+    border-radius: 10px;
+}
+
+.comment__avatar{
+    border-radius: 50%;
+    object-fit: cover;
+    width: 80px;
+    height: 80px;
+}
+
+.comment__avatar_and_content{
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+/* Кнопки комментариев */
+.comment__buttons{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.comment__button{
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: filter 0.8s 0.2s;
+    cursor: pointer;
+    border: none;
+}
+
+.comment__button:hover{
+    filter: brightness(110%);
+}
+
+.comment__button__icon{
+    object-fit: contain;
+    width: 60%;
+    height: 60%;
+}
+
+/*Даты*/
+.comment__date{
+    padding-top: 10px;
+    border-top: 1px solid #c4c4c4;
+    display: flex;
+    gap: 12px;
+}

@@ -2,12 +2,15 @@ from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 from . import views
 from rest_framework.routers import DefaultRouter
-from .views import ProductViewSet, CartItemViewSet
+from .views import ProductViewSet, CartItemViewSet, CommentViewSet
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 router = DefaultRouter()
 router.register(r'products', ProductViewSet, basename='product')
 router.register(r'cart-items', CartItemViewSet, basename='cart-items')
+
+comment_router = DefaultRouter()
+comment_router.register(r'comments', CommentViewSet, basename='comment')
 
 urlpatterns = [
     # Товары, корзина и избранное
@@ -22,7 +25,9 @@ urlpatterns = [
     path('auth/profile/', views.ProfileUpdateView.as_view(), name='profile'),
     path('auth/login/', views.LoginView.as_view(), name='login'),
     path('auth/logout/', views.LogoutView.as_view(), name='logout'),
-
+    # Комментарии
+    path('products/<int:product_id>/',
+         include(comment_router.urls)),
     # Опции TextChoices для форм
     path('animal_size_options', views.AnimalSizeOptionsView.as_view(),
          name="animal_size_options"),

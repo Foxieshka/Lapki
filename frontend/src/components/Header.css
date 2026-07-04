@@ -27,6 +27,8 @@
 .header__title{
     color: inherit;
     letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-block: 10px;
 }
 
 .navigation__list{

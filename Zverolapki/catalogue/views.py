@@ -70,6 +70,25 @@ class ProductViewSet(viewsets.ModelViewSet):
         serializer=self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
+
+class CommentViewSet(viewsets.ModelViewSet):
+    serializer_class = CommentSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        product_id = self.kwargs.get('product_id')
+        if product_id:
+            return Comment.objects.filter(product_id=product_id)
+        return Comment.objects.none()
+
+    def perform_create(self, serializer):
+        product_id = self.kwargs.get('product_id')
+        product = Product.objects.get(id=product_id)
+        serializer.save(
+            user=self.request.user,
+            product=product
+        )
+
 class AnimalSizeOptionsView(APIView):
     permission_classes = [AllowAny]
     def get(self, request, *args, **kwargs):

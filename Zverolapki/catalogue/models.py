@@ -82,6 +82,17 @@ class Product(models.Model):
     def get_final_price(self):
         return int(floor(self.price * (100 - self.discount) / 100))
 
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=CASCADE,
+                                verbose_name="Изображение товара", related_name="images")
+    content = models.ImageField(upload_to="product_media", verbose_name="Контент")
+
+    def __str__(self):
+        return f"Изображение товара '{self.product.title}'"
+
+    class Meta:
+        verbose_name = "Изображение товара"
+        verbose_name_plural = "Изображения товаров"
 
 #Вид животного
 class Animal(models.Model):
@@ -126,5 +137,45 @@ class CartItem(models.Model):
         verbose_name = 'Товар в корзине'
         verbose_name_plural = "Товары в корзине"
 
+#Заказы
+# class Order(models.Model):
+#     class Status(models.TextChoices):
+#         COMPLETED = "Completed", "Выполнен"
+#         DELAYED = "Delayed", "Задерживается"
+#
+#
+#     user = models.ForeignKey(User, on_delete=CASCADE,
+#                              verbose_name="Пользователь", related_name="order",
+#                              null=True, blank=True)
+#     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+#     updated_at = models.DateTimeField(auto_now=True, verbose_name="Обновлено")
+#     delivery_date = models.DateTimeField(verbose_name="Время доставки")
+#
+#     class Meta:
+#         db_table = 'orders'
+#         verbose_name = 'Заказ'
+#         verbose_name_plural = "Заказы"
+#
+# class OrderItem(models.Model):
+#     pass
 
+# Комментарии
+class Comment(models.Model):
+    content = models.TextField(max_length=200, verbose_name="Содержание сообщения")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Отредактировано")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments',
+                             verbose_name="Товар")
+    rating = models.IntegerField(verbose_name="Оценка")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments',
+                               verbose_name="Пользователь")
+
+    class Meta:
+        verbose_name = "Комментарий"
+        verbose_name_plural = "Комментарии"
+        db_table = 'comments'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.content
 

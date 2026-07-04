@@ -14,6 +14,7 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'title']
         read_only_fields = ['id']
 
+
 class AnimalSerializer(serializers.ModelSerializer):
     products_count = serializers.SerializerMethodField()
     class Meta:
@@ -24,7 +25,38 @@ class AnimalSerializer(serializers.ModelSerializer):
     def get_products_count(self, obj):
         return Product.objects.filter(animal=obj).count()
 
+# Пользователь
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'first_name', 'last_name',
+                  'avatar', 'birth_date']
+        read_only_fields = ['id', 'created_at']
+
+class CommentSerializer(serializers.ModelSerializer):
+    user_detail = UserSerializer(source='user', read_only=True)
+    created_at = serializers.DateTimeField(format="%d.%m.%Y", read_only=True)
+    updated_at = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
+
+    class Meta:
+        model = Comment
+        fields = ['id', 'product', 'user', 'user_detail',
+                  'content', 'rating', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'product', 'user_detail', 'created_at', 'updated_at']
+
+    def validate_rating(self, value):
+        if value < 0 or value > 5:
+            raise serializers.ValidationError("Рейтинг может быть от 0 до 5.")
+        return value
+
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImage
+        fields = ['id', 'product', 'content']
+        read_only_fields = ['id', 'product']
+
 class ProductSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(many=True, read_only=True)
     animal_title = serializers.CharField(source='animal.title', read_only=True)
     category_title = serializers.CharField(source='category.title', read_only=True)
     user_name = serializers.CharField(source='user.username', read_only=True)
@@ -32,11 +64,8 @@ class ProductSerializer(serializers.ModelSerializer):
     #Кастомные поля
     box_type_name = serializers.SerializerMethodField(read_only=True)
     animal_size_name = serializers.SerializerMethodField(read_only=True)
-    can_edit = serializers.SerializerMethodField()
-
     created_at = serializers.DateTimeField(format="%d.%m.%Y", read_only=True)
     updated_at = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
-
     class Meta:
         model = Product
         fields = [
@@ -46,7 +75,7 @@ class ProductSerializer(serializers.ModelSerializer):
             'thumbnail', 'animal', 'animal_title',
             'category', 'category_title', 'animal_size',
             'animal_size_name', 'created_at', 'updated_at',
-            'can_edit',
+            'images',
         ]
         read_only_fields = ['created_at', 'updated_at', ]  # Только для чтения
 
@@ -68,14 +97,6 @@ class ProductSerializer(serializers.ModelSerializer):
         if value > 100:
             raise serializers.ValidationError("Скидка не может превышать 100%")
         return value
-
-    def get_can_edit(self, obj):
-        # Получаем пользователя из контекста запроса
-        request = self.context.get('request')
-        if request and request.user.is_authenticated:
-            # Логика проверки: например, автор объекта или администратор
-            return obj.user == request.user or request.user.is_staff
-        return False
 
 class CartItemSerializer(serializers.ModelSerializer):
     # Сериализатор для товара в корзине
@@ -107,14 +128,6 @@ class CartSerializer(serializers.ModelSerializer):
     def get_total_price(self, obj):
         # Общая стоимость корзины
         return sum(item.get_total_price() for item in obj.items.all())
-
-# Пользователь
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name',
-                  'avatar', 'birth_date']
-        read_only_fields = ['id', 'created_at']
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])

@@ -2,6 +2,7 @@ import './Footer.css'
 import vk_icon from '../assets/svg/social-media/vk_white.svg'
 import yt_icon from '../assets/svg/social-media/yt_white.svg'
 import pin_icon from '../assets/svg/social-media/pinterest_white.svg'
+import {Link} from 'react-router-dom'
 
 function Footer(){
     return(
@@ -19,33 +20,29 @@ function Footer(){
             <ul className="menu__list footer__menu__list">
                 <li className="menu__list-item
                 footer__menu__list-item">
-                    <a className="menu__link menu__link-active">
-                        Главная
-                    </a>
+                    <Link to="/">Главная</Link>
                 </li>
                 <li className="menu__list-item footer__menu__list-item">
-                    <a className="menu__link">
-                        Каталог
-                    </a>
+                    <Link to="/products">Каталог</Link>
                 </li>
-                <li className="menu__list-item
-                footer__menu__list-item">
-                    <a className="menu__link menu__link-active">
-                        Вход
-                    </a>
-                </li>
+{/*                 <li className="menu__list-item */}
+{/*                 footer__menu__list-item"> */}
+{/*                     <a className="menu__link menu__link-active"> */}
+{/*                         Вход */}
+{/*                     </a> */}
+{/*                 </li> */}
             </ul>
         </nav>
         <ul className="social__media-list footer__social__media">
             <li className="social__media-list__item">
-            <a className="social__media-link" href="#">
+            <a className="social__media-link" href="https://vk.com/foxieshka">
                 <img className="social__media-icon"
                 src={vk_icon}
                 alt="Иконка ВК"/>
             </a>
             </li>
             <li className="social__media-list__item">
-            <a className="social__media-link" href="#">
+            <a className="social__media-link" href="https://ru.pinterest.com/dreamfury27/">
                 <img className="social__media-icon"
                 src={pin_icon}
                 alt="Иконка Пинтерест"/>

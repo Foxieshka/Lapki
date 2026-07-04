@@ -1,0 +1,7 @@
+.comments__list{
+    list-style: none;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

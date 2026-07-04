@@ -6,6 +6,14 @@ class CartItemInline(admin.TabularInline):
     model = CartItem
     extra = 1
 
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 1
+
+class CommentInline(admin.TabularInline):
+    model = Comment
+    extra = 1
+
 @admin.register(Animal)
 class AnimalAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
@@ -21,12 +29,21 @@ class UserAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
 
+@admin.register(ProductImage)
+class ProductImageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'product', 'content')
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'product', 'user', 'content', 'created_at', 'updated_at')
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'description', 'created_at',
                     'price', 'discount', 'animal', 'category')
 
     list_display_links = ('id', 'title', 'animal')
+    inlines = [CommentInline, ProductImageInline]
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
