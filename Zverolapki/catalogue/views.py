@@ -11,6 +11,7 @@ from .permissions import *
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
 from django.db.models import Q
+from django.db.models import Avg
 from rest_framework_simplejwt.tokens import RefreshToken
 
 class CategoryListView(generics.ListAPIView):
@@ -44,6 +45,11 @@ class ProductViewSet(viewsets.ModelViewSet):
     search_fields = ['title', 'description']  # Поиск по названию и описанию
     ordering_fields = ['price', 'created_at']  # Сортировка
 
+    def get_queryset(self):
+        return Product.objects.annotate(
+            average_rating=Avg('comments__rating')
+        ).order_by('-id')
+
     def get_permissions(self):
         # Динамическое определение прав в зависимости от действия
         if self.action == 'create':
@@ -70,7 +76,6 @@ class ProductViewSet(viewsets.ModelViewSet):
         serializer=self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
-
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -86,6 +91,23 @@ class CommentViewSet(viewsets.ModelViewSet):
         product = Product.objects.get(id=product_id)
         serializer.save(
             user=self.request.user,
+            product=product
+        )
+
+class ProductImageViewSet(viewsets.ModelViewSet):
+    serializer_class = ProductImageSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        product_id = self.kwargs.get('product_id')
+        if product_id:
+            return ProductImage.objects.filter(product_id=product_id)
+        return ProductImage.objects.none()
+
+    def perform_create(self, serializer):
+        product_id = self.kwargs.get('product_id')
+        product = Product.objects.get(id=product_id)
+        serializer.save(
             product=product
         )
 

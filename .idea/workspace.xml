@@ -5,32 +5,50 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86227d28-c52e-48a6-b49f-6f5d5ba33388" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/ImageSlider.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/comment/Comment.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/comment/Comment.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/comment/Comments.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/comment/Comments.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/error_message/ErrorMessage.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/error_message/ErrorMessage.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/success_message/SuccessMessage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/image_slider/ImageSlider.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zverolapki/catalogue/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zverolapki/catalogue/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zverolapki/catalogue/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zverolapki/catalogue/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Zverolapki/catalogue/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zverolapki/catalogue/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Zverolapki/catalogue/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zverolapki/catalogue/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Zverolapki/catalogue/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zverolapki/catalogue/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Zverolapki/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Zverolapki/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/assets/fonts/fonts.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/fonts.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/assets/hero.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/assets/react.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/assets/vite.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AddToTheCart.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AddToTheCart.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AddToTheCart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AddToTheCart.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Footer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/buc-diagram.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/idef0-a0.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/stakeholder-matrix.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/design/component-diagram.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/design/design-class-diagram.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/design/domain-model-diagram.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/design/er-diagram.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/design/rest-jwt-interaction.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/design/sequence-diagram.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/design/state-diagram.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Kursovaya_Lyusha.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/footer/Footer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/footer/Footer.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/GridRow.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/GridRow.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/header/Header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/header/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/ImageSlider.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/image_slider/ImageSlider.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/comment/Comment.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/comment/Comment.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/comment/Comment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/comment/Comment.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Home.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/ProductDetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ProductDetail.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/ProductDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ProductDetail.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements/purchase-activity1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements/purchase-activity2.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements/use-case-diagram.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/analysis/buc-diagram.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/analysis/idef0-a0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/analysis/stakeholder-matrix.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/design/component-diagram.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/design/design-class-diagram.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/design/domain-model-diagram.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/design/er-diagram.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/design/rest-jwt-interaction.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/design/sequence-auth.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/design/state-diagram.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/requirements/activity-purchase.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/requirements/use-case-diagram.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,11 +92,11 @@
       <recent name="C:\D\Code\Python\WEB\Lapki\Zverolapki\catalogue" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\D\Code\Python\WEB\Lapki\frontend\src\components\footer" />
+      <recent name="C:\D\Code\Python\WEB\Lapki\frontend\src\components\header" />
+      <recent name="C:\D\Code\Python\WEB\Lapki\frontend\src\components\image_slider" />
       <recent name="C:\D\Code\Python\WEB\Lapki\frontend\src\components\error_message" />
       <recent name="C:\D\Code\Python\WEB\Lapki\frontend\src\components\success_message" />
-      <recent name="C:\D\Code\Python\WEB\Lapki\frontend\src\components\delete_modal" />
-      <recent name="C:\D\Code\Python\WEB\Lapki\frontend\src\components\category_card" />
-      <recent name="C:\D\Code\Python\WEB\Lapki\frontend\src\components\banner" />
     </key>
   </component>
   <component name="SharedIndexes">

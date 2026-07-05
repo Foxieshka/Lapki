@@ -56,12 +56,12 @@ class ProductImageSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'product']
 
 class ProductSerializer(serializers.ModelSerializer):
-    images = ProductImageSerializer(many=True, read_only=True)
     animal_title = serializers.CharField(source='animal.title', read_only=True)
     category_title = serializers.CharField(source='category.title', read_only=True)
     user_name = serializers.CharField(source='user.username', read_only=True)
     final_price = serializers.SerializerMethodField()
     #Кастомные поля
+    average_rating = serializers.FloatField(read_only=True)
     box_type_name = serializers.SerializerMethodField(read_only=True)
     animal_size_name = serializers.SerializerMethodField(read_only=True)
     created_at = serializers.DateTimeField(format="%d.%m.%Y", read_only=True)
@@ -75,7 +75,7 @@ class ProductSerializer(serializers.ModelSerializer):
             'thumbnail', 'animal', 'animal_title',
             'category', 'category_title', 'animal_size',
             'animal_size_name', 'created_at', 'updated_at',
-            'images',
+            'average_rating'
         ]
         read_only_fields = ['created_at', 'updated_at', ]  # Только для чтения
 

@@ -1,7 +1,7 @@
 import './Footer.css'
-import vk_icon from '../assets/svg/social-media/vk_white.svg'
-import yt_icon from '../assets/svg/social-media/yt_white.svg'
-import pin_icon from '../assets/svg/social-media/pinterest_white.svg'
+import vk_icon from '../../assets/svg/social-media/vk_white.svg'
+import yt_icon from '../../assets/svg/social-media/yt_white.svg'
+import pin_icon from '../../assets/svg/social-media/pinterest_white.svg'
 import {Link} from 'react-router-dom'
 
 function Footer(){

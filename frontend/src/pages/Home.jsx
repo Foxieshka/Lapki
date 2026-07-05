@@ -1,4 +1,3 @@
-import Header from '../components/Header.jsx'
 import React, { useState, useEffect } from 'react';
 import Banner from '../components/banner/Banner.jsx'
 import CategoryCard from '../components/category_card/CategoryCard.jsx'

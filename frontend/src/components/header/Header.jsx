@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom'
 import './Header.css'
-import authService from '../services/authService.js'
+import authService from '../../services/authService.js'
 import React, { useState, useEffect } from 'react';
 
 function Header(){

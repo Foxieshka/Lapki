@@ -3,7 +3,7 @@ import {AuthProvider} from './context/AuthContext.jsx'
 import {CartProvider} from './context/CartContext.jsx'
 import PrivateRoute from './components/PrivateRoute'
 
-import Header from './components/Header'
+import Header from './components/header/Header'
 import Home from './pages/Home'
 import Products from './pages/Products'
 import Cart from './pages/Cart'
@@ -14,7 +14,7 @@ import Profile from './pages/Profile'
 import ProductCreate from './pages/ProductCreate'
 import './App.css'
 import './variables.css'
-import Footer from './components/Footer.jsx'
+import Footer from './components/footer/Footer.jsx'
 import './assets/fonts/fonts.css'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';

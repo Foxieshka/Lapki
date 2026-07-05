@@ -4,7 +4,7 @@
     grid-template-columns: 1fr min-content 1fr;
     align-items: center;
     padding: var(--header-padding, 20px);
-    background-image: url(../assets/images/mirolla_header.png);
+    background-image: url(../../assets/images/mirolla_header.png);
     background-position: top;
     background-size: cover;
     background-repeat: no-repeat;

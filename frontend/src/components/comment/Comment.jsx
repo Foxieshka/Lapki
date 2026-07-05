@@ -15,29 +15,29 @@ export default function Comment({comment}){
                 <h4>{comment.user_detail.username}</h4>
                 <p className="comment__content">{comment.content}</p>
                 <p className="comment__rating">{comment.rating} ☆ из 5</p>
-                <div className="comment__buttons">
-                    {user && user.id === comment.user &&
-                         <button type="button"
-                            className="comment__button comment__button--delete"
-                            onClick={() => handleDelete()}
-                            >
-                                <img src={deleteIcon} className="comment__button__icon"/>
-                         </button>
-                    }
-                    {user && user.id === comment.user &&
-                         <button type="button"
-                            className="comment__button comment__button--edit"
-                            onClick={() => handleDelete()}
-                            >
-                                <img src={editIcon} className="comment__button__icon"/>
-                         </button>
-                    }
-                </div>
             </div>
         </div>
         <div className="comment__date">
             <span>Создано: {comment.created_at}</span>
             <span>Ред. {comment.updated_at}</span>
+            <div className="comment__buttons">
+                {user && user.id === comment.user &&
+                     <button type="button"
+                        className="comment__button comment__button--delete"
+                        onClick={() => handleDelete()}
+                        >
+                            <img src={deleteIcon} className="comment__button__icon"/>
+                     </button>
+                }
+                {user && user.id === comment.user &&
+                     <button type="button"
+                        className="comment__button comment__button--edit"
+                        onClick={() => handleDelete()}
+                        >
+                            <img src={editIcon} className="comment__button__icon"/>
+                     </button>
+                }
+            </div>
         </div>
     </div>);
 }

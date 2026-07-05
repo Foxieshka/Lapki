@@ -7,7 +7,8 @@ import {useAuth} from '../context/AuthContext'
 import api from '../services/api'
 import axios from 'axios';
 
-import Comments from '../components/comment/Comments.jsx'
+import Comments from '../components/comment/Comments'
+import ImageSlider from '../components/image_slider/ImageSlider'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 function ProductDetail(){
@@ -28,11 +29,21 @@ function ProductDetail(){
             retry: 1,
             enabled: !!productId, // Запрос выполняется только если есть id
     });
-
+    // Загрузка комментариев
     const { data: comments } = useQuery({
         queryKey: ['comments', productId],
         queryFn: async() => {
             const response = await api.get(`/products/${productId}/comments/`);
+            return response.data.results || response.data;
+        },
+        // Кешируем отдельно от товара
+        staleTime: 2 * 60 * 1000,
+    });
+
+    const { data: images } = useQuery({
+        queryKey: ['images', productId],
+        queryFn: async() => {
+            const response = await api.get(`/products/${productId}/images/`);
             return response.data.results || response.data;
         },
         // Кешируем отдельно от товара
@@ -78,15 +89,21 @@ function ProductDetail(){
                 <a className="breadcrumb__link--active">{product.title}</a>
             </div>
             <div className="product">
-                <section className = "product__section--img product__section">
+                <section className = "product__section--thumbnail product__section">
                     <img src={product.thumbnail}
                     className="product__img"
                     alt="Изображение товара"/>
                 </section>
-                <section className = "product__section--price product__section">
+                <section className="product__section--slider product__section">
+                    <ImageSlider images={images} />
+                </section>
+                <section className = "product__section--info product__section">
                     <h2 className = "product__title">{product.title}</h2>
                     <p className="product__description">
                         {product.description}
+                    </p>
+                    <p className="product__rating">
+                        <strong>Рейтинг:</strong> {product.average_rating} ☆ из 5
                     </p>
                     <p className="product__price">
                         Цена:
