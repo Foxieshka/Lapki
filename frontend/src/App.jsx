@@ -5,11 +5,12 @@ import PrivateRoute from './components/PrivateRoute'
 
 import Header from './components/header/Header'
 import Home from './pages/Home'
+import NotFound from './pages/NotFound'
 import Products from './pages/Products'
 import Cart from './pages/Cart'
 import ProductDetail from './pages/ProductDetail'
 import Register from './pages/Register'
-import Login from './components/Login'
+import Login from './pages/Login'
 import Profile from './pages/Profile'
 import ProductCreate from './pages/ProductCreate'
 import './App.css'
@@ -68,6 +69,8 @@ function App() {
                                 <ProductCreate />
                             </PrivateRoute>
                         } />
+                        {/* Маршрут для обработки 404 ошибки */}
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
                     </main>
                     <Footer />

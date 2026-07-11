@@ -123,15 +123,15 @@ function Products(){
         <main>
             <h1 className="content__title" style={{marginTop: 0}}>Наши товары</h1>
             <section className="search-sorting-section">
-{/*                 <form className="sorting-form"> */}
-{/*                     <label htmlFor="ordering">Сортировать по:</label> */}
-{/*                     <select name="ordering" id="ordering" className="sorting-form__select"> */}
-{/*                         <option value="">Не сортировать</option> */}
-{/*                         <option value="-created_at">Новинки</option> */}
-{/*                         <option value="price">Дешевле</option> */}
-{/*                         <option value="-price">Дороже</option> */}
-{/*                     </select> */}
-{/*                 </form> */}
+                <form className="sorting-form">
+                    <label htmlFor="ordering">Сортировать по:</label>
+                    <select name="ordering" id="ordering" className="sorting-form__select">
+                        <option value="">Не сортировать</option>
+                        <option value="-created_at">Новинки</option>
+                        <option value="price">Дешевле</option>
+                        <option value="-price">Дороже</option>
+                    </select>
+                </form>
                 <input type="text" placeholder="Поиск..." value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 style={{padding: '0.5rem', width:'200px'}} name="search"/>

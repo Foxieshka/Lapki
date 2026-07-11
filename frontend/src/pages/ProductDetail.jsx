@@ -103,7 +103,7 @@ function ProductDetail(){
                         {product.description}
                     </p>
                     <p className="product__rating">
-                        <strong>Рейтинг:</strong> {product.average_rating} ☆ из 5
+                        <strong>Рейтинг:</strong> {product.average_rating ? product.average_rating : 0} ☆ из 5
                     </p>
                     <p className="product__price">
                         Цена:
@@ -125,14 +125,18 @@ function ProductDetail(){
                         className="product__button product__button--delete"
                         onClick={() => handleDelete()}
                         >
-                            Удалить товар
+                            <span className="button__text">
+                                Удалить товар
+                            </span>
                         </button>
                         }
                         {user?.id == product.user &&
                         <a href={`/products/${product.id}/update`}
-                        className="product__button product__button--delete"
+                        className="product__button product__button--update"
                         >
-                            Редактировать
+                            <span className="button__text">
+                                Редактировать
+                            </span>
                         </a>
                         }
                     </div>
@@ -146,7 +150,6 @@ function ProductDetail(){
                         <GridRow label="Размер животного" value={product.animal_size_name} />
                     </section>
                     <section className="product__comments">
-                        <h2 className="comments__title">Отзывы:</h2>
                         <Comments comments={comments} />
                     </section>
                 </section>

@@ -16,6 +16,7 @@
     display: grid;
     gap: 30px;
     grid-template-columns: 450px 1fr;
+    grid-template-rows: 450px auto;
     text-align: left;
 }
 
@@ -97,23 +98,43 @@
     margin-bottom: 20px;
 }
 
+.product__button:disabled{
+    background-color: gray;
+}
+
 .product__button{
-    width: 10rem;
     font-family: inherit;
     font-size: inherit;
-    background-color: green;
     color: white;
-    border-radius: 10px;
-    transition: filter 0.8s 0.2s;
     cursor: pointer;
+    padding-block: 10px;
+    background-color: #118715;
     border: none;
+    transition: all 0.5s ease;
+    border-radius: 10px;
+    padding-inline: 15px;
+}
+
+.product__button--update{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .product__button:hover{
     filter: brightness(110%);
 }
 
-.product__button--delete{
+.button__text{
+    font-weight: bold;
+    color: #fff;
+}
+
+.product__button:hover span{
+    border-bottom: #fff 1px solid;
+}
+
+/*.product__button--delete{
     cursor: pointer;
     padding-block: 10px;
     background-color: #118715;
@@ -123,7 +144,7 @@
     border-radius: 10px;
     padding-inline: 15px;
     font-size: inherit;
-}
+}*/
 
 /* Комментарии */
 .comments__title{

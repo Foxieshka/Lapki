@@ -5,3 +5,14 @@
     flex-direction: column;
     gap: 20px;
 }
+
+.form--comment{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.login_or_register{
+    margin-bottom: 20px;
+}

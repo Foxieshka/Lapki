@@ -7,17 +7,28 @@ import plusIcon from '../assets/svg/plus.svg'
 import minusIcon from '../assets/svg/minus.svg'
 
 function AddToTheCart({product, quantity = 1}){
-    const {addToTheCart, cartData} = useCart();
+    const {addToTheCart, updateQuantity, cartData} = useCart();
+    const [cartItem, setCartItem] = useState(null);
+    useEffect(() =>
+    {
+        if (cartData && cartData.items && product) {
+            const item = cartData.items.find(item => item.product === product.id);
+            setCartItem(item || null); // Если не найден - null
+        } else {
+            setCartItem(null);
+        }
+    }
+    , [cartData, product]);
     function handleClick(){
         addToTheCart({ product: product.id, quantity: quantity });
-        setInCart(true);
     }
     function handlePlusClick(){
+        updateQuantity({delta: 1, cartItem: cartItem});
     }
     function handleMinusClick(){
+        updateQuantity({delta: -1, cartItem: cartItem});
     }
-    const [inCart, setInCart] = useState(false);
-    if(inCart) {
+    if(cartItem) {
         return (
             <div className="product__cart_item_controls">
                 <p>В корзине:</p>
@@ -26,7 +37,7 @@ function AddToTheCart({product, quantity = 1}){
                 <img src={plusIcon}
                 className="product__cart_item_button__icon"/>
              </button>
-            <span className="product__cart_item_quantity">5 шт.</span>
+            <span className="product__cart_item_quantity">{cartItem.quantity} шт.</span>
             <button className="product__cart_item_button
              product__cart_item_button--delete">
                 <img src={minusIcon} onClick={handleMinusClick}

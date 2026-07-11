@@ -15,16 +15,16 @@ export default function ImageSlider({images}){
             prevIndex === 0 ? images.length - 1 : prevIndex - 1
         );
     }
-    // Эффект для автоматической смены слайдов
-    useEffect(() => {
-        const timer = setInterval(() => {
-            nextSlide();
-        }, 3000); // 3000 миллисекунд = 3 секунды
-
-        // Функция очистки: сбрасывает таймер при размонтировании
-        // компонента, чтобы избежать утечек памяти
-        return () => clearInterval(timer);
-    }, [currentIndex]); // Перезапускаем эффект при смене слайда
+//     // Эффект для автоматической смены слайдов
+//     useEffect(() => {
+//         const timer = setInterval(() => {
+//             nextSlide();
+//         }, 3000); // 3000 миллисекунд = 3 секунды
+//
+//         // Функция очистки: сбрасывает таймер при размонтировании
+//         // компонента, чтобы избежать утечек памяти
+//         return () => clearInterval(timer);
+//     }, [currentIndex]); // Перезапускаем эффект при смене слайда
 
     if (!images || images.length === 0) return null;
 
@@ -34,13 +34,13 @@ export default function ImageSlider({images}){
             <button onClick={prevSlide}
             className="slider__button
             slider__button--prev">
-                ❰
+                <span>❰</span>
             </button>
             {/*   Кнопка "вперед"     */}
             <button onClick={nextSlide}
             className="slider__button
             slider__button--next">
-                ❱
+                <span>❱</span>
             </button>
             <div className="slider__viewport">
             {images.map((image, index) => (
